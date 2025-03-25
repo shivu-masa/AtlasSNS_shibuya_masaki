@@ -1,6 +1,10 @@
 <x-logout-layout>
   <div id="clear">
-    <p>〇〇さん</p>
+
+ @if (session('username'))
+        <p>{{ session('username') }}さん！</p>
+    @endif
+
     <p>ようこそ！AtlasSNSへ！</p>
     <p>ユーザー登録が完了しました。</p>
     <p>早速ログインをしてみましょう。</p>
