@@ -9,8 +9,8 @@ use App\Http\Controllers\PostsController;
 
 
 
-    //Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');//画面表示
-    //Route::post('login', [AuthenticatedSessionController::class, 'store']);//ログイン処理
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');//画面表示
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);//ログイン処理
 
     Route::get('register', [RegisteredUserController::class, 'create']);
     Route::post('register', [RegisteredUserController::class, 'store']);
@@ -21,3 +21,6 @@ use App\Http\Controllers\PostsController;
 
     Route::post('/create',[RegisteredUserController::class, 'store']);
     Route::get('/added',[RegisteredUserController::class, 'added']);
+
+//ログアウト
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

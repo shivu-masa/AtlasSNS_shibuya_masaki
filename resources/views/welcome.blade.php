@@ -3,8 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <!-- app.css連携 -->
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <title>Laravel</title>
+
+
+ <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="js/app.js"></script>ーーー③
+
+
+
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

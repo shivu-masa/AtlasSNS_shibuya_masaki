@@ -51,7 +51,6 @@ $request->session()->put('username', 'shivu');
 
     public function added(Request $request)
     {
-        // ユーザー名をセッションに保存
           $username = User::get('username');
     return view('auth.added', ['username' => $username]);
     }
