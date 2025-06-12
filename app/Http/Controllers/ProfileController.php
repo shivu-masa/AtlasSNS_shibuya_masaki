@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +12,50 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function profile(){
+    public function profile()
+    {
         return view('profiles.profile');
     }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('profiles.profile', compact('user'));
+    }
+
+    public function edit()
+{
+    $user = Auth::user();
+    return view('profiles.edit', compact('user'));
+}
+
+public function update(Request $request)
+{
+    $user = Auth::user();
+
+    $validated = $request->validate([
+        'username' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+        'password' => 'nullable|string|min:8|confirmed',
+        'bio' => 'nullable|string|max:1000',
+        'icon_image' => 'nullable|image|max:2048',
+    ]);
+
+    if ($request->hasFile('icon_image')) {
+        $path = $request->file('icon_image')->store('icons', 'public');
+        $user->icon_image = $path;
+    }
+
+    $user->username = $validated['username'];
+    $user->email = $validated['email'];
+    $user->bio = $validated['bio'] ?? null;
+
+    if (!empty($validated['password'])) {
+        $user->password = bcrypt($validated['password']);
+    }
+
+    $user->save();
+
+    return redirect()->route('top')->with('success', 'プロフィールを更新しました。');
+}
 }

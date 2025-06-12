@@ -1,10 +1,27 @@
 @charset "UTF-8";
 
-html{
+html {
+    height: 100%;
+    background: linear-gradient(to bottom, #2196f3, #fff176);
+    /* 上が青、下が黄色 */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
     height: 100%;
 }
 
-body{
-    height: 100%;
-    background: #186AC9;
+.header img {
+
+    width: 20%;
+    margin: 0 auto
+}
+
+.header p {
+    margin-top: 5px;
+    font-size: 26px;
+    color: white;
+    text-align: center;
 }

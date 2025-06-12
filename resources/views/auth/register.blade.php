@@ -1,41 +1,41 @@
 
 <x-logout-layout>
 
-@if($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
+{{-- 登録フォーム --}}
+  <div class="login-box">
+    <h1>新規ユーザー登録</h1>
+
+    {{-- バリデーションエラー --}}
+    @if($errors->any())
+      <div class="alert alert-danger text-start" style="color:white; background: rgba(255, 0, 0, 0.5); padding: 10px; border-radius: 5px;">
+        <ul style="margin-bottom: 0;">
+          @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
     @endif
 
-    <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => '/create']) !!}
+    {!! Form::open(['url' => '/create']) !!}
 
+      {{ Form::label('username', 'ユーザー名') }}
+      {{ Form::text('username', null, ['class' => 'form-control']) }}
 
-<h2>新規ユーザー登録</h2>
+      {{ Form::label('email', 'メールアドレス') }}
+      {{ Form::email('email', null, ['class' => 'form-control']) }}
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+      {{ Form::label('password', 'パスワード') }}
+      {{ Form::password('password', ['class' => 'form-control']) }}
 
-{{ Form::label('メールアドレス') }}
-{{ Form::email('email',null,['class' => 'input']) }}
+      {{ Form::label('password_confirmation', 'パスワード確認') }}
+      {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
 
-{{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+      {{ Form::submit('登録', ['class' => 'btn btn-primary btn-submit']) }}
 
-{{ Form::label('パスワード確認') }}
-{{ Form::text('password_confirmation',null,['class' => 'input']) }}
+    {!! Form::close() !!}
 
-{{ Form::submit('登録') }}
-
-<p><a href="login">ログイン画面へ戻る</a></p>
-
-
-
-{!! Form::close() !!}
-
-
+    <div class="login-link">
+      <a href="{{ url('login') }}">ログイン画面へ戻る</a>
+    </div>
+  </div>
 </x-logout-layout>

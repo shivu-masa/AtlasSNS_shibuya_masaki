@@ -23,10 +23,12 @@
         <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     </head>
     <body>
-        <header>
-            <h1><img src="images/atlas.png"></a></h1>
-            <p>Social Network Service</p>
-        </header>
+        <div class="auth-wrapper">
+        <header class="header">
+    <h1><img src="{{ asset('/images/atlas.png') }}" alt="Atlasロゴ"></h1>
+    <p>Social Network Service</p>
+  </header>
+        </div>
         <div id="container">
             {{ $slot }}
         </div>

@@ -140,7 +140,8 @@ sub {
 }
 
 img {
-  vertical-align: middle
+  display: flex;
+
 }
 
 svg:not(:root) {
@@ -343,10 +344,7 @@ th {
   background-image: none
 }
 
-.img-thumbnail,
-body {
-  background-color: #f5f8fa
-}
+
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -1701,7 +1699,7 @@ mark {
 }
 
 .text-muted {
-  color: #777
+  color: #ffffff;
 }
 
 .text-primary {
@@ -3890,6 +3888,9 @@ textarea.input-lg {
 
 .btn {
   display: inline-block;
+  color: white !important;
+  background-color: #333;
+  border: 1px solid white;
   margin-bottom: 0;
   font-weight: 400;
   text-align: center;
@@ -4353,7 +4354,7 @@ input[type=submit].btn-block {
 }
 
 .fade {
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity .15s linear
 }
 
@@ -4405,7 +4406,7 @@ tbody.collapse.in {
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 2000;
   display: none;
   min-width: 160px;
   padding: 5px 0;
@@ -7086,7 +7087,9 @@ button.close {
 
 .modal-open .modal {
   overflow-x: hidden;
-  overflow-y: auto
+  overflow-y: auto;
+
+
 }
 
 .modal-dialog {
@@ -7137,7 +7140,8 @@ button.close {
 
 .modal-body {
   position: relative;
-  padding: 15px
+  padding: 15px;
+  color: black;
 }
 
 .modal-footer {
@@ -8086,4 +8090,327 @@ button.close {
 .profile-image {
   width: 40px;
   height: 40px;
+}
+
+.ml-3 {
+  padding-bottom: 10px;
+
+}
+
+
+
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #222;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 4px;
+}
+
+input[type="submit"],
+.btn-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+input[type="submit"]:hover {
+  background-color: #666;
+}
+
+a {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #fff;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Avenir Next', sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* フォーム全体を中央に配置 */
+.register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+
+  background-color: #111;
+  border-radius: 10px;
+
+}
+
+/* タイトル */
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+/* 入力欄 */
+.input {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #222;
+  color: #fff;
+}
+
+/* ボタン */
+button,
+.btn-submit,
+input[type="submit"] {
+  background-color: red;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #ccc;
+}
+
+/* エラーメッセージ */
+.alert.alert-danger {
+  background-color: #300;
+  color: #f99;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.header {
+  margin: 0 auto;
+
+}
+
+.dropdown-item:hover {
+  background-color: #444;
+  color: #fff;
+}
+
+html,
+body {
+
+  height: 100%;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Avenir Next', sans-serif;
+}
+
+.post-form {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.postbox {
+  margin-left: 100px;
+  margin-right: 230px;
+  /* サイドバーとの間隔 */
+  /* 左寄り */
+}
+
+.profile-image {
+  margin-top: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post-input {
+  margin-top: 30px;
+  width: 66%;
+  height: 120px;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  /* ボーダーなし */
+  border-radius: 8px;
+
+}
+
+.post-input::placeholder {
+  color: #aaa;
+}
+
+
+.post-submit-btn {
+
+
+  position: absolute;
+  bottom: 0px;
+  right: 30%;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.post-submit-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.post-separator {
+  height: 2px;
+  background-color: #888;
+  /* グレー色 */
+  margin: 30px 0;
+  border-radius: 2px;
+  width: 100%;
+}
+
+/* 投稿日時（白に変更） */
+
+
+.post-buttons button img {
+  display: block;
+  padding-right: 0%;
+}
+
+.post-separator2 {
+  height: 0.5px;
+  background-color: #888;
+  /* グレー色 */
+  margin: 30px 0;
+  border-radius: 2px;
+  width: 100vw;
+}
+
+/* 背景グラデーションと中央寄せ */
+body.login-page {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 全体を中央配置 */
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #007bff, #ffeb3b);
+}
+
+/* ヘッダー部分の中央寄せ */
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header img {
+  width: 200px;
+}
+
+/* ログインフォームボックス */
+.login-box {
+  background-color: rgba(0, 0, 0, 0.4);
+
+  padding: 30px;
+  width: 430px;
+  margin: 50px auto;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* テキストフォームやボタンなどの余白 */
+.form-control {
+  margin-bottom: 15px;
+}
+
+/* ボタンを100%幅に */
+.btn-submit {
+  width: 100%;
+}
+
+/* 登録リンクの位置調整 */
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.custom-header {
+  background: #007bff;
+  /* 青 */
+  color: #fff;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 以下同じ：ドロップダウン・画像など */
+.custom-header .dropdown-toggle {
+  color: #fff;
+  border-color: #fff;
+}
+
+.custom-header .dropdown-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.custom-header .dropdown-menu {
+  background-color: #fff;
+  border: none;
+}
+
+.custom-header .dropdown-item {
+  color: #333;
+}
+
+.custom-header .dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.postbox {
+  width: 100%;
+  max-width: 960px;
+  /* 必要に応じて調整 */
+  margin: 0 auto;
 }
