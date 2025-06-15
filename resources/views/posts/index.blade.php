@@ -32,7 +32,7 @@
     <div class="d-flex align-items-start mb-5" style="position: relative;">
 
       <!-- プロフィール画像 -->
-      <a href="{{ route('profile.id', ['id' => $post->user->id]) }}">
+
         @if ($post->user->icon_image)
           <img src="{{ asset('storage/' . $post->user->icon_image) }}"
                alt="プロフィール画像"
@@ -44,18 +44,20 @@
                class="rounded-circle"
                style="width:40px; height:40px;">
         @endif
-      </a>
+
 
       <!-- ユーザー名と投稿内容 -->
       <div class="ms-3">
-        <strong>{{ $post->user->username }}</strong><br>
-        {{ $post->post }}<br>
-        <small class="text-muted">投稿日時：{{ $post->created_at->format('Y/m/d H:i') }}</small>
-      </div>
+  <div class="d-flex align-items-center">
+    <strong class="me-2">{{ $post->user->username }}</strong>
+    <small class="text-muted"style="margin-left: 1310px;">投稿日時：{{ $post->created_at->format('Y/m/d H:i') }}</small>
+  </div>
+  {!! nl2br(e($post->post)) !!}
+</div>
 
       <!-- 自分の投稿にだけボタンを表示 -->
       @if (Auth::id() === $post->user->id)
-        <div class="d-flex align-items-center" style="position: absolute; right: 0; top: 0;">
+        <div class="d-flex align-items-center" style="position: absolute; right: 20px; top: 30px;">
           <!-- 編集ボタン -->
           <button type="button" class="edit-button me-2" data-bs-toggle="modal" data-bs-target="#editModal{{ $post->id }}" style="border:none; background:none; padding:0;">
             <img src="{{ asset('images/edit.png') }}" style="width:30px; height:30px;margin-left: -350px;">

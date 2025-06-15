@@ -8145,6 +8145,7 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* フォーム全体を中央に配置 */
@@ -8218,7 +8219,7 @@ input[type="submit"]:hover {
 html,
 body {
 
-  height: 100%;
+
   font-family: 'Hiragino Kaku Gothic ProN', 'Avenir Next', sans-serif;
 }
 
@@ -8319,21 +8320,28 @@ body {
 
 /* 背景グラデーションと中央寄せ */
 body.login-page {
-  height: 100vh;
-
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
 }
 
 /* 全体を中央配置 */
 .login-wrapper {
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  /* ← height を min-height に変更 */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #007bff, #ffeb3b);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px 20px;
+  /* エラー表示で伸びても余裕を持たせる */
+  box-sizing: border-box;
 }
 
 /* ヘッダー部分の中央寄せ */
@@ -8413,4 +8421,33 @@ body.login-page {
   max-width: 960px;
   /* 必要に応じて調整 */
   margin: 0 auto;
+}
+
+#main-content {
+  margin-right: 240px;
+}
+
+.form-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* テキストボックスの見た目調整 */
+.form-control {
+  max-width: 500px;
+  /* 横幅を少し短く */
+  padding-top: 0.7rem;
+  /* 縦幅広げる */
+  padding-bottom: 0.7rem;
+  font-size: 1rem;
+}
+
+/* フォーム行のマージン調整 */
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin-top: 1rem;
 }

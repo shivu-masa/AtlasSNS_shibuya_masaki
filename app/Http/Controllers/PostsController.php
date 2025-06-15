@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -9,9 +10,16 @@ class PostsController extends Controller
 // 投稿一覧表示
     public function index()
     {
-        // 投稿とユーザー情報を取得
-        $posts = Post::with('user')->orderBy('created_at', 'desc')->get();
-        return view('posts.index', compact('posts'));
+       $user = Auth::user();
+
+    // 自分と、自分がフォローしているユーザーのIDを取得
+    $followedUserIds = $user->followings()->pluck('followed_id')->toArray();
+    $userIds = array_merge([$user->id], $followedUserIds);
+
+    // そのユーザーたちの投稿のみ取得
+    $posts = Post::whereIn('user_id', $userIds)->with('user')->latest()->get();
+
+    return view('posts\index', compact('posts'));
     }
 
 // 投稿の新規作成

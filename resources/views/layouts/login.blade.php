@@ -31,7 +31,8 @@
 </head>
 
 <body>
-<header class="custom-header py-5 ml-3 px-4 d-flex justify-content-between align-items-center">
+<header class="custom-header py-5 ml-3 px-4 d-flex justify-content-between align-items-center"
+style="z-index: 2000; position: relative;">
   {{-- 左側ロゴ --}}
   <div id="head">
     <h1 class="mb-0">
@@ -41,36 +42,73 @@
     </h1>
   </div>
 
-  <div class="d-flex align-items-center gap-3">
-  {{-- Bootstrap ドロップダウン --}}
-  <div class="dropdown">
+  <div style="width: 100%; display: flex; justify-content: flex-end; margin-right: 20px;">
+  <div class="accordion-container" style="position: relative;">
+    <!-- トグルボタン -->
     <button
-      class="btn btn-outline-light dropdown-toggle"
-      type="button"
-      id="userMenuButton"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-      style="padding: 10px 16px; font-size: 1.1rem; line-height: 1.2;"
+      id="accordionToggle"
+      onclick="toggleAccordionMenu()"
+      style="background-color:#007bff; padding: 14px 20px; font-size: 1.5rem; border: none; color: white; cursor: pointer;"
     >
       {{ Auth::user()->username }} さん
+      <span id="arrowIcon" style="margin-left: 10px;">▼</span>
     </button>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
-      <li><a class="dropdown-item" href="{{ route('top') }}">HOME</a></li>
-      <li><a class="dropdown-item" href="{{ route('profile') }}">プロフィール編集</a></li>
-      <li><a class="dropdown-item" href="{{ route('logout') }}">ログアウト</a></li>
+
+    <!-- アコーディオンメニュー -->
+    <ul id="accordionMenu"
+        style="display: none; margin: 0; padding: 16px; list-style: none;
+               background-color: #ffffff; border: 1px solid #ccc; border-radius: 6px;
+               position: absolute; top: 100%; right: 0; width: 250px;
+               box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000; font-size: 1.2rem;">
+      <li style="padding: 10px 0;">
+        <a href="{{ route('top') }}" style="text-decoration: none; color: #333; display: block; padding: 8px 12px; border-radius: 4px;"
+           onmouseover="this.style.backgroundColor='#007bff'; this.style.color='white';"
+           onmouseout="this.style.backgroundColor=''; this.style.color='#333';">
+          HOME
+        </a>
+      </li>
+      <li style="padding: 10px 0;">
+        <a href="{{ route('profile') }}" style="text-decoration: none; color: #333; display: block; padding: 8px 12px; border-radius: 4px;"
+           onmouseover="this.style.backgroundColor='#007bff'; this.style.color='white';"
+           onmouseout="this.style.backgroundColor=''; this.style.color='#333';">
+          プロフィール編集
+        </a>
+      </li>
+      <li style="padding: 10px 0;">
+        <a href="{{ route('logout') }}" style="text-decoration: none; color: #333; display: block; padding: 8px 12px; border-radius: 4px;"
+           onmouseover="this.style.backgroundColor='#007bff'; this.style.color='white';"
+           onmouseout="this.style.backgroundColor=''; this.style.color='#333';">
+          ログアウト
+        </a>
+      </li>
     </ul>
   </div>
+</div>
+
 
   {{-- アイコン画像（ユーザーのicon_image） --}}
   <img class="profile-image"
        src="{{ Auth::user()->icon_image ? asset('storage/' . Auth::user()->icon_image) : asset('images/default-user.png') }}"
        alt="プロフィール画像"
-       style="width: 40px; height: 40px; border-radius: 50%;margin-top: 0px; object-fit: cover;">
+       style="width: 40px; height: 40px; border-radius: 50%;margin-top: 0px; object-fit: cover;margin-right: 40px;">
 </div>
 </header>
 
   {{--  サイドバー --}}
-  <div id="side-bar" style="position: fixed; top: 130px; right: 0; width: 240px; height: calc(100% - 100px); background-color: #fff; color: #000; border-left: 1px solid #ccc; padding: 20px;  overflow-y: auto;">
+  <div id="side-bar"
+     style="position: fixed;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 100vh;
+            background-color: #fff;
+            color: #000;
+            border-left: 1px solid #ccc;
+            padding: 20px;
+            padding-top: 220px;
+            z-index: 500;
+            overflow-y: auto;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.05);">
   <div id="confirm">
     <p class="fw-bold mb-3">{{ Auth::user()->username }} さんの</p>
 
@@ -103,5 +141,14 @@
   <script src="{{ asset('js/jquery-3.7.1.js') }}"></script>
   <script src="{{ asset('js/function.js') }}"></script>
 </body>
+<script>
+  function toggleAccordionMenu() {
+    const menu = document.getElementById('accordionMenu');
+    const arrow = document.getElementById('arrowIcon');
 
+    const isOpen = menu.style.display === 'block';
+    menu.style.display = isOpen ? 'none' : 'block';
+    arrow.textContent = isOpen ? '▼' : '▲';
+  }
+</script>
 </html>

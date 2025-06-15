@@ -6,10 +6,10 @@
 
   {!! Form::open(['url' => 'login']) !!}
 
-    {{ Form::label('email', 'Email') }}
+    {{ Form::label('email', 'メールアドレス') }}
     {{ Form::text('email', null, ['class' => 'form-control']) }}
 
-    {{ Form::label('password', 'Password') }}
+    {{ Form::label('password', 'パスワード') }}
     {{ Form::password('password', ['class' => 'form-control']) }}
 
     {{ Form::submit('ログイン', ['class' => 'btn btn-primary btn-submit']) }}

@@ -34,11 +34,12 @@ public function update(Request $request)
     $user = Auth::user();
 
     $validated = $request->validate([
-        'username' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:8|confirmed',
-        'bio' => 'nullable|string|max:1000',
-        'icon_image' => 'nullable|image|max:2048',
+         'username' => 'required|string|min:2|max:12',
+        'email' => 'required|email|min:5|max:40|unique:users,email,' . $user->id,
+        'bio' => 'nullable|string|max:150',
+        'icon_image' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
+        'password' => 'required|string|min:8|max:20|confirmed',
+        'password_confirmation' =>'required|string|min:8|max:20|confirmed'
     ]);
 
     if ($request->hasFile('icon_image')) {
