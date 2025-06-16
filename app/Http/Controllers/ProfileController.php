@@ -39,7 +39,7 @@ public function update(Request $request)
         'bio' => 'nullable|string|max:150',
         'icon_image' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
         'password' => 'required|string|min:8|max:20|confirmed',
-        'password_confirmation' =>'required|string|min:8|max:20|confirmed'
+        'password_confirmation' =>'required|string|min:8|max:20',
     ]);
 
     if ($request->hasFile('icon_image')) {

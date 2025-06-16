@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -44,6 +44,8 @@ public function unfollow($id)
 public function show($id)
 {
     $user = User::findOrFail($id);
-    return view('profiles.profile', compact('user'));
+    $posts = $user->posts()->latest()->get();
+    $followings = Auth::user()->followings->pluck('id')->toArray();
+    return view('profiles.profile',  compact('user','posts', 'followings'));
 }
 }

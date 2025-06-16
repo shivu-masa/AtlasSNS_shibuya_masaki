@@ -50,7 +50,7 @@
       <div class="ms-3">
   <div class="d-flex align-items-center">
     <strong class="me-2">{{ $post->user->username }}</strong>
-    <small class="text-muted"style="margin-left: 1310px;">投稿日時：{{ $post->created_at->format('Y/m/d H:i') }}</small>
+    <small class="text-muted"style="margin-left: 1340px;">{{ $post->created_at->format('Y/m/d H:i') }}</small>
   </div>
   {!! nl2br(e($post->post)) !!}
 </div>

@@ -2,55 +2,78 @@
 
 
 
-<div class="container">
-  <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+{{-- プロフィール表示 --}}
+<div class="container px-4 mt-5" style="margin-left: 10%; margin-right: auto;">
+  <div class="d-flex justify-content-between align-items-center pb-3 mb-2">
     <div class="d-flex align-items-center">
-
       {{-- プロフィール画像 --}}
       <img src="{{ $user->icon_image ? asset('storage/' . $user->icon_image) : asset('images/default-icon.png') }}"
-     alt="プロフィール画像"
-     class="rounded-circle me-3"
-     style="width: 70px; height: 70px;">
+           alt="プロフィール画像"
+           class="rounded-circle me-3"
+           style="width: 70px; height: 70px;">
 
       <div>
-        <h5 class="mb-1">ユーザー名：{{ $user->username }}</h5>
-        <p class="mb-0">自己紹介：{{ $user->bio }}</p>
+        <h5 class="mb-3">ユーザー名：{{ $user->username }}</h5>
+        <h5 class="mb-1">自己紹介：{{ $user->bio }}</h5>
       </div>
     </div>
 
-    {{-- フォローボタン --}}
-@if (auth()->id() !== $user->id)
-<!-- 今見ているユーザーが、自分がフォローしている人の中にいるか -->
-    @if (in_array($user->id, auth()->user()->followings()->pluck('followed_id')->toArray()))
-        {{-- フォロー済み：フォロー解除 --}}
-        <form method="POST" action="{{ route('unfollow', ['id' => $user->id]) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">フォロー解除</button>
+    {{-- フォロー／フォロー解除ボタン --}}
+    <div style="margin-right: 30px; min-width: 200px;">
+      @if (in_array($user->id, $followings))
+        <form method="POST" action="{{ route('unfollow', $user->id) }}">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-danger" style="width: 100px; height: 35px; font-size: 12px;">
+            フォロー解除
+          </button>
         </form>
-    @else
-        {{-- 未フォロー：フォローする --}}
-        <form method="POST" action="{{ route('follow', ['id' => $user->id]) }}">
-            @csrf
-            <button type="submit" class="btn btn-primary">フォローする</button>
+      @else
+        <form method="POST" action="{{ route('follow', $user->id) }}">
+          @csrf
+          <button type="submit" class="btn btn-primary" style="width: 100px; height: 35px; font-size: 12px;">
+            フォローする
+          </button>
         </form>
-    @endif
-@endif
+      @endif
+    </div>
   </div>
+</div>
 
-  {{-- 投稿一覧 --}}
-  <div>
-    <h5 class="mb-3">投稿一覧</h5>
+
+<div class="post-separator"></div>
+
+{{-- 投稿一覧 --}}
+<div class="container px-4" style="margin-left: 10%; margin-right: auto;">
+  <div class="posts-list" style="margin-left: 0px;">
     @foreach ($user->posts->sortByDesc('created_at') as $post)
-    <div class="ml-3">
-    <img src="{{ $user->icon_image ? asset('storage/' . $user->icon_image) : asset('images/default-icon.png') }}"
-     alt="プロフィール画像"
-     class="rounded-circle me-3"
-     style="width: 30px; height: 30px;">
-        <strong style="padding: 0px;">{{ $post->user->username }}</strong><br>
-        {{ $post->post }}<br>
-        <small class="text-muted">投稿日時：{{ $post->created_at->format('Y/m/d H:i') }}</small>
+      <div class="d-flex align-items-start mb-5" style="position: relative;">
+        {{-- プロフィール画像 --}}
+        @if ($post->user->icon_image)
+          <img src="{{ asset('storage/' . $post->user->icon_image) }}"
+               alt="プロフィール画像"
+               class="rounded-circle"
+               style="width: 40px; height: 40px;">
+        @else
+          <img src="{{ asset('images/default-icon.png') }}"
+               alt="デフォルト画像"
+               class="rounded-circle"
+               style="width: 40px; height: 40px;">
+        @endif
+
+        {{-- ユーザー名・投稿内容・日時 --}}
+        <div class="ms-3">
+          <div class="d-flex align-items-center">
+            <strong class="me-2">{{ $post->user->username }}</strong>
+            <small class="text-muted" style="margin-left: 1000px;">
+              {{ $post->created_at->format('Y/m/d ') }}
+            </small>
+          </div>
+          {!! nl2br(e($post->post)) !!}
+        </div>
       </div>
+
+      <div class="post-separator2"></div>
     @endforeach
   </div>
 </div>
