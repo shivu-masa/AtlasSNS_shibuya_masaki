@@ -132,6 +132,7 @@ return [
     'username' => 'ユーザー名',
     'email' => 'メールアドレス',
     'password' => 'パスワード',
+    'password_confirmation' => 'パスワード（確認用）',
 ],
 
     'custom' => [

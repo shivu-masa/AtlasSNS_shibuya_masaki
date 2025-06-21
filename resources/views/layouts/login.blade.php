@@ -87,11 +87,15 @@ style="z-index: 2000; position: relative;">
 
 
   {{-- アイコン画像（ユーザーのicon_image） --}}
-  <img class="profile-image"
-       src="{{ Auth::user()->icon_image ? asset('storage/' . Auth::user()->icon_image) : asset('images/default-user.png') }}"
-       alt="プロフィール画像"
-       style="width: 40px; height: 40px; border-radius: 50%;margin-top: 0px; object-fit: cover;margin-right: 40px;">
-</div>
+  @if (Auth::user()->icon_image && file_exists(public_path('storage/' . Auth::user()->icon_image)))
+  <img class="profile-image me-3"
+       src="{{ asset('storage/' . Auth::user()->icon_image) }}"
+       alt="プロフィール画像" style="width: 40px; height: 40px; border-radius: 50%;margin-top: 0px; object-fit: cover;margin-right: 40px;">
+@else
+  <img class="profile-image me-3"
+       src="{{ asset('images/icon1.png') }}"
+       alt="デフォルト画像" style="width: 40px; height: 40px; border-radius: 50%;margin-top: 0px; object-fit: cover;margin-right: 40px;">
+@endif
 </header>
 
   {{--  サイドバー --}}
@@ -99,13 +103,13 @@ style="z-index: 2000; position: relative;">
      style="position: fixed;
             top: 0;
             right: 0;
-            width: 240px;
+            width: 250px;
             height: 100vh;
             background-color: #fff;
             color: #000;
             border-left: 1px solid #ccc;
             padding: 20px;
-            padding-top: 220px;
+            padding-top: 140px;
             z-index: 500;
             overflow-y: auto;
             box-shadow: -2px 0 5px rgba(0,0,0,0.05);">

@@ -30,17 +30,12 @@
     <div class="d-flex align-items-center" style="min-width: 200px;">
       <a href="{{ route('users.profile', ['id' => $user->id]) }}"
          class="d-flex align-items-center text-decoration-none text-dark">
-        @if ($user->icon_image)
-          <img src="{{ asset('storage/' . $user->icon_image) }}"
-               alt="プロフィール画像"
-               width="60" height="60"
-               class="rounded-circle">
-        @else
-          <img src="{{ asset('images/default-icon.png') }}"
-               alt="デフォルト画像"
-               width="50" height="50"
-               class="rounded-circle">
-        @endif
+         <img src="{{ !empty($post->user->icon_image) && file_exists(public_path('storage/' . $post->user->icon_image))
+            ? asset('storage/' . $post->user->icon_image)
+            : asset('images/icon1.png') }}"
+     alt="プロフィール画像"
+     class="rounded-circle"
+     style="width: 60px; height: 60px;">
         <p class="mb-0 ms-3" style="max-width: 180px; word-break: break-word;">{{ $user->username }}</p>
       </a>
     </div>

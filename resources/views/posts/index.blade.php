@@ -2,15 +2,15 @@
 
 <div class="postbox d-flex align-items-start mb-4">
   {{-- ログインユーザーのプロフィール画像 --}}
-  @if (Auth::user()->icon_image)
-    <img class="profile-image me-3"
-         src="{{ asset('storage/' . Auth::user()->icon_image) }}"
-         alt="プロフィール画像">
-  @else
-    <img class="profile-image me-3"
-         src="{{ asset('images/default-icon.png') }}"
-         alt="デフォルト画像">
-  @endif
+  @if (Auth::user()->icon_image && file_exists(public_path('storage/' . Auth::user()->icon_image)))
+  <img class="profile-image me-3"
+       src="{{ asset('storage/' . Auth::user()->icon_image) }}"
+       alt="プロフィール画像">
+@else
+  <img class="profile-image me-3"
+       src="{{ asset('images/icon1.png') }}"
+       alt="デフォルト画像">
+@endif
 
   {{-- 投稿フォーム --}}
   <form method="POST" action="{{ url('/posts') }}" class="position-relative w-100">
@@ -26,31 +26,26 @@
 <div class="post-separator"></div>
 
 <!-- 投稿一覧 -->
-<div class="posts-list" style="margin-left: 100px;" >
+<div class="posts-list" style="margin-left: 200px; margin-right: 270px;">
   @foreach ($posts as $post)
 
     <div class="d-flex align-items-start mb-5" style="position: relative;">
 
       <!-- プロフィール画像 -->
 
-        @if ($post->user->icon_image)
-          <img src="{{ asset('storage/' . $post->user->icon_image) }}"
-               alt="プロフィール画像"
-               class="rounded-circle"
-               style="width:40px; height:40px;">
-        @else
-          <img src="{{ asset('images/default-icon.png') }}"
-               alt="デフォルト画像"
-               class="rounded-circle"
-               style="width:40px; height:40px;">
-        @endif
+      <img src="{{ !empty($post->user->icon_image) && file_exists(public_path('storage/' . $post->user->icon_image))
+            ? asset('storage/' . $post->user->icon_image)
+            : asset('images/icon1.png') }}"
+     alt="プロフィール画像"
+     class="rounded-circle"
+     style="width: 40px; height: 40px;">
 
 
       <!-- ユーザー名と投稿内容 -->
       <div class="ms-3">
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center ">
     <strong class="me-2">{{ $post->user->username }}</strong>
-    <small class="text-muted"style="margin-left: 1340px;">{{ $post->created_at->format('Y/m/d H:i') }}</small>
+    <small class="text-muted"style="position: absolute;right: 315px ;">{{ $post->created_at->format('Y/m/d H:i') }}</small>
   </div>
   {!! nl2br(e($post->post)) !!}
 </div>

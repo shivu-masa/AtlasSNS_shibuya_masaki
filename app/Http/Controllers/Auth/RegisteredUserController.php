@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'icon_image' => 'icon1.png',
         ]);
 // セッション
 $request->session()->put('username',  $request->username);
