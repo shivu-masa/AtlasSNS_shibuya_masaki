@@ -12,7 +12,9 @@
         <div class="row form-row align-items-center">
   {{-- アイコン画像（左端） --}}
   <div class="col-auto d-flex align-items-center" style="width: 40px; height: 40px; margin-left: -50px;">
-  <img src="{{ $user->icon_image ? asset('storage/' . $user->icon_image) : asset('images/default-icon.png') }}"
+  <img src="{{ Auth::user()->icon_image && file_exists(public_path('storage/' . Auth::user()->icon_image))
+              ? asset('storage/' . Auth::user()->icon_image)
+              : asset('images/icon1.png') }}"
        alt="プロフィール画像"
        class="rounded-circle"
        style="width: 40px; height: 40px;">

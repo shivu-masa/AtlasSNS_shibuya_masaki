@@ -7,8 +7,8 @@
   <div class="d-flex justify-content-between align-items-center pb-3 mb-2">
     <div class="d-flex align-items-center">
       {{-- プロフィール画像 --}}
-      <img src="{{ !empty($post->user->icon_image) && file_exists(public_path('storage/' . $post->user->icon_image))
-            ? asset('storage/' . $post->user->icon_image)
+      <img src="{{ !empty($user->icon_image) && file_exists(public_path('storage/' . $user->icon_image))
+            ? asset('storage/' . $user->icon_image)
             : asset('images/icon1.png') }}"
      alt="プロフィール画像"
      class="rounded-circle"
